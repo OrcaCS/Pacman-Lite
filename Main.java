@@ -6,6 +6,8 @@ class Main {
         int row = 0;
         int col = 0;
         char key = ' ';
+        int playerRow = 0;
+        int playerCol = 10;
 
         for (row = 0; row < maze.length; row++) {
             for (col = 0; col < maze[row].length; col++) {
@@ -17,11 +19,15 @@ class Main {
         place(maze, row, col);
         maze(maze, row, col);
 
-        int playerRow = 0;
-        int playerCol = 10;
-
         while (true) {
-            move(maze, key, row, col, playerRow, playerCol);
+            int[] newPositions = move(maze, key, row, col, playerRow, playerCol);
+            playerRow = newPositions[0];
+            playerCol = newPositions[1];
+
+            if (win(maze)) {
+                System.out.println("You win!");
+                System.exit(1);
+            }
         }
     }
 
@@ -44,7 +50,7 @@ class Main {
     }
 
     public static void maze(String[][] maze, int row, int col) {
-        System.out.println("-------------------------------------");
+        System.out.println("\n-------------------------------------");
         for (row = 0; row < maze.length; row++) {
             switch (row) {
                 case 0:
@@ -78,15 +84,73 @@ class Main {
         maze[0][10] = "O";
     }
 
-    public static void move(String[][] maze, char key, int row, int col, int playerRow, int playerCol) {
+    public static int[] move(String[][] maze, char key, int row, int col, int playerRow, int playerCol) {
         Scanner keyboard = new Scanner(System.in);
         key = keyboard.next().charAt(0);
 
-        if (key == 's') {
-            maze[(playerRow + 1)][playerCol] = "O";
-            maze[playerRow][playerCol] = " ";
-            key = ' ';
+        if (key == 'w') {
+            try {
+                if (maze[(playerRow - 1)][playerCol] != "|") {
+                    maze[(playerRow - 1)][playerCol] = "O";
+                    maze[playerRow][playerCol] = " ";
+                    playerRow--;
+                    key = ' ';
+                    maze(maze, row, col);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                maze(maze, row, col);
+            }
+        } else if (key == 's') {
+            try {
+                if (maze[(playerRow + 1)][playerCol] != "|") {
+                    maze[(playerRow + 1)][playerCol] = "O";
+                    maze[playerRow][playerCol] = " ";
+                    playerRow++;
+                    key = ' ';
+                    maze(maze, row, col);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                maze(maze, row, col);
+            }
+        } else if (key == 'a') {
+            try {
+                if (maze[playerRow][(playerCol - 1)] != "|") {
+                    maze[playerRow][(playerCol - 1)] = "O";
+                    maze[playerRow][playerCol] = " ";
+                    playerCol--;
+                    key = ' ';
+                    maze(maze, row, col);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                maze(maze, row, col);
+            }
+        } else if (key == 'd') {
+            try {
+                if (maze[playerRow][(playerCol + 1)] != "|") {
+                    maze[playerRow][(playerCol + 1)] = "O";
+                    maze[playerRow][playerCol] = " ";
+                    playerCol++;
+                    key = ' ';
+                    maze(maze, row, col);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                maze(maze, row, col);
+            }
+        } else {
             maze(maze, row, col);
         }
+
+        return new int[] { playerRow, playerCol };
+    }
+
+    public static boolean win(String[][] maze) {
+        for (int row = 0; row < maze.length; row++) {
+            for (int col = 0; col < maze[row].length; col++) {
+                if (maze[row][col].equals(".")) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
