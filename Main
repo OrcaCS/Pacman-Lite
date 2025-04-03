@@ -79,8 +79,12 @@ class Main {
         
         row = 0;
         col = 10;
+        int saveRow = 0;
+        int saveCol = 10;
         
         if (true) {
+            row = saveRow;
+            col = saveCol;
         if (key == 'w') {
             try {
             if (maze[(row - 1)][col] != "|") {
@@ -103,6 +107,8 @@ class Main {
                 key = ' ';
             }
         }
+        saveRow = row;
+        saveCol = col;
         maze(maze, row, col);
         }
     }
