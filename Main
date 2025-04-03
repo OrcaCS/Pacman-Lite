@@ -5,6 +5,8 @@ class Main {
         String[][] maze = new String[6][11];
         int row = 0;
         int col = 0;
+        int saveRow = 0;
+        int saveCol = 0;
         
         for (row = 0; row < maze.length; row++) {
             for (col = 0; col < maze[row].length; col++) {
@@ -15,8 +17,12 @@ class Main {
         changeMaze(maze, row, col);
         place(maze, row, col);
         maze(maze, row, col);
+        
+        row = 0;
+        col = 10;
+        
         while (true) {
-        move(maze, row, col);
+        move(maze, row, col, saveRow, saveCol);
         }
     }
     
@@ -73,18 +79,15 @@ class Main {
         maze[0][10] = "O";
     }
     
-    public static void move(String[][] maze, int row, int col) {
+    public static void move(String[][] maze, int row, int col, int saveRow, int saveCol) {
         Scanner keyboard = new Scanner(System.in);
         char key = keyboard.next().charAt(0);
         
-        row = 0;
-        col = 10;
-        int saveRow = 0;
-        int saveCol = 10;
-        
         if (true) {
+            saveRow = row;
+            saveCol = col;
             row = saveRow;
-            col = saveCol;
+            col = saveCol;a
         if (key == 'w') {
             try {
             if (maze[(row - 1)][col] != "|") {
@@ -102,13 +105,16 @@ class Main {
             maze[(row + 1)][col] = "O";
             maze[row][col] = " ";
             row += 1;
-            System.out.println("ROW IS: " + row);
             } catch (ArrayIndexOutOfBoundsException e) {
                 key = ' ';
             }
         }
+        System.out.println("ROW IS: " + row);
+        System.out.println("SAVE ROW IS: " + saveRow);
         saveRow = row;
         saveCol = col;
+        System.out.println("ROW IS: " + row);
+        System.out.println("SAVE ROW IS: " + saveRow);
         maze(maze, row, col);
         }
     }
