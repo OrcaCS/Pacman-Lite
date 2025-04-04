@@ -129,7 +129,7 @@ class Main {
 
         if (key == 'w') {
             try {
-                if (maze[playerRow][(playerCol - 1)] != "|") {
+                if (maze[playerRow][(playerCol - 1)] != "|" || maze[playerRow][(playerCol - 1)] != "-") {
                     maze[(playerRow - 1)][playerCol] = "O";
                     maze[playerRow][playerCol] = " ";
                     playerRow--;
@@ -141,7 +141,7 @@ class Main {
             }
         } else if (key == 's') {
             try {
-                if (maze[playerRow][(playerCol + 1)] != "|") {
+                if (maze[playerRow][(playerCol + 1)] != "|" || maze[playerRow][(playerCol + 1)] != "-") {
                     maze[(playerRow + 1)][playerCol] = "O";
                     maze[playerRow][playerCol] = " ";
                     playerRow++;
@@ -151,7 +151,7 @@ class Main {
             }
         } else if (key == 'a') {
             try {
-                if (maze[playerRow][(playerCol - 1)] != "|") {
+                if (maze[playerRow][(playerCol - 1)] != "|" || maze[playerRow][(playerCol - 1)] != "-") {
                     maze[playerRow][(playerCol - 1)] = "O";
                     maze[playerRow][playerCol] = " ";
                     playerCol--;
@@ -161,7 +161,7 @@ class Main {
             }
         } else if (key == 'd') {
             try {
-                if (maze[playerRow][(playerCol + 1)] != "|") {
+                if (maze[playerRow][(playerCol + 1)] != "|" || maze[playerRow][(playerCol + 1)] != "-") {
                     maze[playerRow][(playerCol + 1)] = "O";
                     maze[playerRow][playerCol] = " ";
                     playerCol++;
