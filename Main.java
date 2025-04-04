@@ -17,14 +17,39 @@ class Main {
             }
         }
 
-        System.out.println("Please select a level: 1, 2");
-        level = keyboard.nextInt();
-        if (level == 1) {
-            levelOne(maze, row, col);
+        while (true) {
+            try {
+                System.out.println("\nPlease select a level: 1, 2, 3");
+                level = keyboard.nextInt();
+                if (level == 1) {
+                    System.out.println("\nObjective: Consume all the pellets ('.'). Have fun!");
+                    levelOne(maze, row, col);
+                    break;
+                } else if (level == 2) {
+                    System.out.println("\nObjective: Consume all the pellets ('.'). Have fun!");
+                    levelTwo(maze, row, col);
+                    break;
+                } else if (level == 3) {
+                    System.out.println("\nObjective: Consume all the pellets ('.'). Have fun!");
+                    levelThree();
+                    break;
+                } else if (level == 69) {
+                    System.out.println("\nSecret level...");
+                    levelSixtyNine(maze, row, col);
+                    break;
+                } else if (level == 420) {
+                    System.out.println("\nSecret level... Sus...");
+                    levelFourTwenty(maze, row, col);
+                    break;
+                } else {
+                    System.out.println("Please choose a valid level.");
+                }
+            } catch (Exception e) {
+                System.out.println("Please choose a valid level.");
+                keyboard.nextLine();
+            }
         }
-        if (level == 2) {
-            levelTwo(maze, row, col);
-        }
+
         place(maze, row, col);
         maze(maze, row, col);
 
@@ -35,6 +60,7 @@ class Main {
 
             if (win(maze)) {
                 System.out.println("You win!");
+                System.out.println("If you would like to play again, please rerun the program.");
                 System.exit(1);
             }
         }
@@ -83,6 +109,54 @@ class Main {
         maze[1][1] = "_";
         maze[1][2] = "_";
         maze[5][5] = "|";
+    }
+
+    public static void levelThree() {
+        // do nothing
+    }
+
+    public static void levelSixtyNine(String[][] maze, int row, int col) {
+        for (col = 1; col < 5; col++) {
+            maze[1][col] = "_";
+        }
+        for (row = 0; row < 5; row++) {
+            maze[row][5] = "|";
+        }
+        for (row = 3; row < 5; row++) {
+            for (col = 1; col < 4; col++) {
+                maze[row][col] = "_";
+            }
+        }
+        for (col = 6; col < 10; col++) {
+            maze[4][col] = "_";
+        }
+        for (row = 1; row < 3; row++) {
+            for (col = 7; col < 10; col++) {
+                maze[row][col] = "_";
+            }
+        }
+    }
+
+    public static void levelFourTwenty(String[][] maze, int row, int col) {
+        for (row = 2; row < 4; row++) {
+            for (col = 10; col < 11; col++) {
+                maze[row][col] = "_";
+            }
+        }
+        maze[0][8] = "|";
+        maze[1][8] = "|";
+        maze[4][8] = "|";
+        maze[5][8] = "|";
+        for (row = 0; row < 2; row++) {
+            for (col = 0; col < 8; col++) {
+                maze[row][col] = "_";
+            }
+        }
+        for (row = 4; row < 6; row++) {
+            for (col = 0; col < 8; col++) {
+                maze[row][col] = "_";
+            }
+        }
     }
 
     public static void maze(String[][] maze, int row, int col) {
