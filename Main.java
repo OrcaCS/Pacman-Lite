@@ -22,6 +22,7 @@ class Main {
                 System.out.println("\nPlease select a level: 1, 2, 3");
                 level = keyboard.nextInt();
                 if (level == 1) {
+                    System.out.println("\nPlayer is 'O.' Use WASD to move.");
                     System.out.println("\nObjective: Consume all the pellets ('.'). Have fun!");
                     levelOne(maze, row, col);
                     break;
